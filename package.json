@@ -1,0 +1,55 @@
+{
+  "name": "@nayaabh/react-broadcast-channel",
+  "version": "0.1.0",
+  "description": "A React hook for broadcasting and subscribing to messages using the BroadcastChannel API.",
+  "keywords": [
+    "react",
+    "broadcast-channel",
+    "hooks",
+    "message-broadcasting"
+  ],
+  "license": "ISC",
+  "author": "Abhilash Nayak <abhilash6399@gmail.com> (https://github.com/nayaabh)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nayaabh/react-broadcast-channel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nayaabh/react-broadcast-channel/issues"
+  },
+  "homepage": "https://github.com/nayaabh/react-broadcast-channel#readme",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs"
+    }
+  },
+  "main": "./dist/index.umd.cjs",
+  "module": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "@types/node": "^22.13.10",
+    "@types/react": "^19.0.10",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^15.15.0",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.24.1",
+    "vite": "^6.2.0"
+  }
+}
