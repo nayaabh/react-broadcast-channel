@@ -1,18 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useBroadcastChannel } from "./useBroadcastChannel";
 
-export const useBroadcastState = <MessageType,>(
-  channelName: string
-): [MessageType | null, (data: MessageType) => void] => {
-  const [message, postMessage] = useBroadcastChannel<MessageType>(channelName);
-  const [messageState, setMessageState] = useState(message);
-  const handlePostMessage = (message: MessageType) => {
-    postMessage(message);
-    setMessageState(message);
-  };
-  useEffect(() => {
-    setMessageState(message);
-  }, [message]);
+type BroadcastStateProps<T> = [message: T | null, sendMessage: (data: T) => void];
 
-  return [messageState, handlePostMessage];
+export const useBroadcastState = <T,>(channelName: string): BroadcastStateProps<T> => {
+  const [message, setMessageState] = useState<T | null>(null);
+
+  const [postMessage] = useBroadcastChannel(channelName, setMessageState);
+
+  const sendMessage = (message: T) => {
+    setMessageState(message);
+    postMessage(message);
+  };
+
+  return [message, sendMessage];
 };

@@ -1,18 +1,29 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo } from "react";
 
-export const useBroadcastChannel = <MessageType,>(
-  channelName: string
-): [MessageType | null, (data: MessageType) => void] => {
-  const channel = new BroadcastChannel(channelName);
-  const message = useRef<MessageType>(null);
+type BroadcastChannelProps<T> = [postMessage: (data: T | null) => void, closeChannel: () => void];
+
+export const useBroadcastChannel = <T,>(
+  channelName: string,
+  onMessage: (message: T | null) => void = () => {}
+): BroadcastChannelProps<T> => {
+  const channel = useMemo(() => new BroadcastChannel(channelName), [channelName]);
+
   useEffect(() => {
-    channel.addEventListener("message", (event: MessageEvent) => {
-      message.current = event.data;
-    });
+    function eventListener(event: MessageEvent<T | null>) {
+      onMessage(event.data);
+    }
+    channel.addEventListener("message", eventListener);
     return () => {
-      channel.close();
+      channel.removeEventListener("message", eventListener);
     };
-  }, []);
+  }, [channel, onMessage]);
 
-  return [message.current, channel.postMessage];
+  const postMessage = (data: T | null) => {
+    channel.postMessage(data);
+  };
+  const closeChannel = () => {
+    channel.close();
+  };
+
+  return [postMessage, closeChannel];
 };
