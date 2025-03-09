@@ -1,8 +1,14 @@
 # React Broadcast Channel
 
-A simple React hook that allows you to broadcast messages between components, tabs, iframes and windows. It can be used to share state across different parts of an application or between different windows. It can be used to share low-latency data without the need for polling or server-side communication.
+A lightweight, intuitive, and scalable library for broadcasting messages between components, tabs, iframes, and windows. It empowers developers to share low-latency data and states effortlessly across different parts of an application or between multiple windows, using simple react hooks.
 
 > It uses `BroadcastChannel API` under the hood.
+
+## Key Features
+
+- **Low-Latency Data Sharing**: Share data instantly between components, tabs, iframes, and windows without polling or server-side communication.
+- **Cross-Windows Messaging**: Send messages between components, tabs, iframes, and windows seamlessly.
+- **Effortless State Management**: Manage state changes across your application with our intuitive `useBroadcastState` hook.
 
 ## Installation
 
@@ -12,17 +18,20 @@ npm install @nayaabh/react-broadcast-channel
 
 ## API Reference
 
-- `useBroadcastChannel(channelName: string, onMessage: (message: T | null) => void = () => {}): BroadcastChannelProps<T>`
-  - Creates a new `BroadcastChannel` instance with the specified channel name.
-  - The `onMessage` callback is called whenever a message is received from another client.
-  - Returns: `[postMessage, closeChannel]`:
-    - `postMessage` sends a message to all connected clients
-    - `closeChannel` closes the channel.
-- `useBroadcastState(channelName: string): BroadcastStateProps<T>`
-  - Provides a stateful hook for managing messages in a broadcast channel.
-  - Returns: `[message, sendMessage]`
-    - `message` is the current message
-    - `sendMessage` is a function to send a new message.
+### `useBroadcastChannel(channelName: string, onMessage: (message: T | null) => void = () => {}): BroadcastChannelProps<T>`
+
+- Creates a new `BroadcastChannel` instance with the specified channel name.
+- The `onMessage` callback is called whenever a message is received from another client.
+- Returns: `[postMessage, closeChannel]`:
+  - `postMessage` sends a message to all connected clients
+  - `closeChannel` closes the channel.
+
+### `useBroadcastState(channelName: string): BroadcastStateProps<T>`
+
+- Provides a stateful hook for managing messages in a broadcast channel.
+- Returns: `[message, sendMessage]`
+  - `message` is the current message
+  - `sendMessage` is a function to send a new message.
 
 ## Basic Usage
 
@@ -47,7 +56,6 @@ export const BroadcastPlayBox = () => {
     const data = new FormData(e.target);
     const text = data.get("message") as string;
     const dateTime = getTimestamp();
-
     // Send message to all connected clients
     setMessage(`${dateTime} - ${text}`);
   }, []);
