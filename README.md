@@ -10,30 +10,17 @@ A lightweight, intuitive, and scalable library for broadcasting messages between
 - **Cross-Windows Messaging**: Send messages between components, tabs, iframes, and windows seamlessly.
 - **Effortless State Management**: Manage state changes across your application with our intuitive `useBroadcastState` hook.
 
+## Demo
+
+![Demo GIF](https://raw.githubusercontent.com/nayaabh/assets.devy.in/main/products/react-broadcast-channel-demo.gif)
+
 ## Installation
 
 ```npm
 npm install @nayaabh/react-broadcast-channel
 ```
 
-## API Reference
-
-### `useBroadcastChannel(channelName: string, onMessage: (message: T | null) => void = () => {}): BroadcastChannelProps<T>`
-
-- Creates a new `BroadcastChannel` instance with the specified channel name.
-- The `onMessage` callback is called whenever a message is received from another client.
-- Returns: `[postMessage, closeChannel]`:
-  - `postMessage` sends a message to all connected clients
-  - `closeChannel` closes the channel.
-
-### `useBroadcastState(channelName: string): BroadcastStateProps<T>`
-
-- Provides a stateful hook for managing messages in a broadcast channel.
-- Returns: `[message, sendMessage]`
-  - `message` is the current message
-  - `sendMessage` is a function to send a new message.
-
-## Basic Usage
+## Getting Started
 
 ### `useBroadcastState`
 
@@ -157,6 +144,23 @@ function getTimestamp() {
   return `${year}-${month}-${day} ${hour}:${minute}:${second}.${millisecond}`;
 }
 ```
+
+## API Reference
+
+### `useBroadcastChannel(channelName: string, onMessage: (message: T | null) => void = () => {}): BroadcastChannelProps<T>`
+
+- Creates a new `BroadcastChannel` instance with the specified channel name.
+- The `onMessage` callback is called whenever a message is received from another client.
+- Returns: `[postMessage, closeChannel]`:
+  - `postMessage` sends a message to all connected clients
+  - `closeChannel` closes the channel.
+
+### `useBroadcastState(channelName: string): BroadcastStateProps<T>`
+
+- Provides a stateful hook for managing messages in a broadcast channel.
+- Returns: `[message, sendMessage]`
+  - `message` is the current message
+  - `sendMessage` is a function to send a new message.
 
 ## References
 
